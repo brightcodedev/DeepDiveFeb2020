@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 8080;
 const questionRoutes = require("./routes/questions");
+const choiceRoutes = require("./routes/choices");
 
 app.use( express.json() );
 app.use( express.urlencoded({
@@ -9,6 +10,7 @@ app.use( express.urlencoded({
 }));
 
 app.use('/questions', questionRoutes);
+app.use('/choices', choiceRoutes);
 
 // app.get('/:id', (req, res) =>{
 //   console.log(req.params);//Path variable localhost:8080/12

@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
   Choice.associate = function(models) {
     Choice.belongsToMany(models.Question, {
       through: 'QuestionChoice',
-      as: 'questions'
+      as: 'questions',
+      foreignKey: 'choiceId',
+      otherKey: 'questionId'
     })
   };
   return Choice;

@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+var cors = require('cors')
 const port = 8080;
 const questionRoutes = require("./routes/questions");
 const choiceRoutes = require("./routes/choices");
@@ -8,6 +9,8 @@ app.use( express.json() );
 app.use( express.urlencoded({
   extended: true
 }));
+app.use(cors())
+
 
 app.use('/questions', questionRoutes);
 app.use('/choices', choiceRoutes);

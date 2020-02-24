@@ -20,30 +20,30 @@ router.get('/:id', async (req, res)=>{
 
 router.post('/', multParse.none(), async (req, res)=>{
   let postData = req.body;
-  let choiceSet = new Set(postData.choices);
-  console.log(choiceSet);
-  if(choiceSet.size !== 4){
-    res.status(400).json({status:'Incorrect number of choices or duplicate choices'});
-    return;
-  }
+  // let choiceSet = new Set(postData.choices);
+  // console.log(choiceSet);
+  // if(choiceSet.size !== 4){
+  //   res.status(400).json({status:'Incorrect number of choices or duplicate choices'});
+  //   return;
+  // }
   let question = await Question.create(postData, { returning: true});
-  postData.choices.forEach( async (choiceId)=>{
-
-    let isAnswer = req.body.answers.includes(choiceId);
-    const choice = await Choice.findByPk(choiceId);
-    if (!choice) {
-      res.status(400);
-      return;
-    }
-
-    let association = {
-      questionId: question.id,
-      choiceId: choiceId,
-      isAnswer: isAnswer
-    }
-    QuestionChoice.create(association);
-
-  });
+  // postData.choices.forEach( async (choiceId)=>{
+  //
+  //   let isAnswer = req.body.answers.includes(choiceId);
+  //   const choice = await Choice.findByPk(choiceId);
+  //   if (!choice) {
+  //     res.status(400);
+  //     return;
+  //   }
+  //
+  //   let association = {
+  //     questionId: question.id,
+  //     choiceId: choiceId,
+  //     isAnswer: isAnswer
+  //   }
+  //   QuestionChoice.create(association);
+  //
+  // });
 
   res.status(200).json({status:'Created Successfully', question:question});
 })
